@@ -5,7 +5,7 @@ import com.googlecode.objectify.annotation.Id;
 
 /**
  * 
- * @author Yun
+ * @author Xianlei
  * 
  * This object must be created by manger, with the purpose to protect privacy of residents.
  * 
@@ -38,6 +38,8 @@ public class Resident {
 	
 	
 	// constructor of Residents
+	private Resident(){
+	}
 	
 	public Resident(Integer roomNumber, String email, String name, String state, String city, String aptName, 
 							String gender, Integer age, Long apartmentId)
