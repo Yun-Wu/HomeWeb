@@ -10,6 +10,9 @@ public class OfyService {
     static {
     	factory().register(Manager.class);
     	factory().register(Resident.class);
+    	factory().register(Carpool.class);
+    	factory().register(Sale.class);
+    	factory().register(RepairRequest.class);
     }
 
     public static Objectify ofy() {
