@@ -13,8 +13,8 @@ public class LoginServlet extends HttpServlet {
 			throws IOException {
 		String Email = req.getParameter("email");
 		String password = req.getParameter("password");
-		System.out.println(Email);
-		System.out.println(password);
+//		System.out.println(Email);
+//		System.out.println(password);
 
 		List<Manager> managers = OfyService.ofy().load().type(Manager.class)
 				.list();
@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
 				if (m.getEmail().trim().equals(Email.trim())
 						&& m.getPassword().trim().equals(password.trim())) {
 					System.out.println("Log in successfully");
-					resp.sendRedirect("/index.html");
+					resp.sendRedirect("/Manage.jsp?AptName=" + m.getAptName());
 					return;
 				}
 			}
