@@ -73,6 +73,10 @@ public class Resident {
 		return name;
 	}
 	
+	public Integer getAge(){
+		return age;
+	}
+	
 	public void removeFromApt(){
 		
 		apartmentId =null;
