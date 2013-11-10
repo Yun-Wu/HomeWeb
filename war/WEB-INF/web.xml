@@ -26,6 +26,26 @@
     <url-pattern>/reg</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>CreateServlet</servlet-name>
+    <servlet-class>com.yun.homeplusplus.CreateResidentServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>CreateServlet</servlet-name>
+    <url-pattern>/create</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteServlet</servlet-name>
+    <servlet-class>com.yun.homeplusplus.DeleteResidentServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DeleteServlet</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

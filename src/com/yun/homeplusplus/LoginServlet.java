@@ -24,7 +24,8 @@ public class LoginServlet extends HttpServlet {
 				if (m.getEmail().trim().equals(Email.trim())
 						&& m.getPassword().trim().equals(password.trim())) {
 					System.out.println("Log in successfully");
-					resp.sendRedirect("/Manage.jsp?AptName=" + m.getAptName());
+					resp.sendRedirect("/Manage.jsp?AptName=" + m.getAptName() 
+							+ "&AptId=" + m.getAptId());
 					return;
 				}
 			}

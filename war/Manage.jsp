@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ page import="com.yun.homeplusplus.Resident" %>
+<%@ page import="com.yun.homeplusplus.Manager" %>
 <%@ page import="com.yun.homeplusplus.OfyService" %>
 
 <%@ page import="java.util.List" %>
@@ -21,11 +22,15 @@
   
 <BODY>
 
-       <form name="deletestreaminput" action="deleteStreamServlet" method="get">  
-        <table class="table table-hover">
-        <tr><td>Name</td><td>Last Update</td><td>Number of Pictures</td><td>Delete</td></tr>
+       <form name="residents" action="delete" method="get">  
+        <table>
+        <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
 <%
 		String aptName = request.getParameter("AptName");
+		String aptIdString = request.getParameter("AptId");
+		Long aptId = Long.parseLong(aptIdString);
+		
+		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		List<Resident> residents = OfyService.ofy().load().type(Resident.class).list();
 		//Collections.sort(residents);
         
@@ -34,19 +39,21 @@
 		  // the line below is useful when debugging (jsp or servlet)
 		  // ERROR: java.lang.NullPointerException
 		  //System.out.println("s = " + s);
-		  if (r.getAptName().equals(aptName)){
+		  if (r.getAptId().equals(aptId)){
 		  %>
-		  <tr><td><a href="index.html"> <%= r.getName() %></a></td> 
+		  <tr><td><%= r.getName()%></td> 
 		  <td><%=r.getAge()%></td>
-		  <td><%=s.pictures %></td>
-		  <td><label class="checkbox"><input type="checkbox" name="<%= s.name %>"></label></td><tr>
+		  <td><%=r.getRoomNumber() %></td>
+		  <td><label class="checkbox"><input type="checkbox" name="<%= r.getId() %>"></label></td><tr>
 
 <% }} %>
 		
 	  </table>
+	<input type="hidden" name="AptId" value="<%=aptId %>">
 	<input type="submit" class="btn" value="Delete Checked">
 	</form>
-
+	<button onclick="location.href='/Create.jsp?AptId='+<%=aptId %>;">Create Residents</button>
+	
 
 </BODY>
 </HTML>

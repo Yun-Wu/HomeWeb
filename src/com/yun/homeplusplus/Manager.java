@@ -40,6 +40,10 @@ public class Manager {
 		return aptName;
 	}
 	
+	public Long getAptId(){
+		return id;
+	}
+	
 	public String getEmail(){
 		return email;
 	}
@@ -48,6 +52,13 @@ public class Manager {
 		return password;
 	}
 	
+	public String getState(){
+		return state;
+	}
+	
+	public String getCity(){
+		return city;
+	}
 
     public boolean equals(Object obj) {
         if (obj == null)

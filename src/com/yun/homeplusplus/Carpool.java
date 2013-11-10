@@ -30,6 +30,7 @@ public class Carpool {
 	
 	
 	// construct
+	private Carpool(){}
 	
 	public Carpool(Long apartmentId, Long userId, String carOwnner, String start, String destination, String message,
 					String year, String month, String date, String time){
