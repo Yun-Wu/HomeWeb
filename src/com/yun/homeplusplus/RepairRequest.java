@@ -8,12 +8,14 @@ import java.util.List;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
+
 @Entity
-public class RepairRequest {
+public class RepairRequest implements Comparable<RepairRequest> {
 	
 	@Id
 	private Long id;
 	private Long userId;
+	private Long aptId;
 	private Integer roomNumber;
 	
 	private String userName;
@@ -23,12 +25,15 @@ public class RepairRequest {
 	private Integer priority;
 	private List<String> pictureUrlList;
 	
+	private boolean isRead;
 	
-	public RepairRequest(Long userId, String userName, String title, String content, Integer priority,
+	
+	public RepairRequest(Long userId, Long aptId, String userName, String title, String content, Integer priority,
 							List<String> pictureUrlList, Integer roomNumber )
 	{
 		
 		this.userId = userId;
+		this.aptId = aptId;
 		this.roomNumber = roomNumber;
 		this.userName=userName;
 		this.title = title;
@@ -36,6 +41,7 @@ public class RepairRequest {
 		this.priority = priority;
 		this.pictureUrlList = pictureUrlList;
 		createDate = new Date();
+		this.isRead = false;
 		
 	}
 	
@@ -43,7 +49,9 @@ public class RepairRequest {
 		
 	}
 
-
+	public Long getRequestId(){
+		return id;
+	}
 	
 	public String getUserName() {
 		return userName;
@@ -51,6 +59,10 @@ public class RepairRequest {
 	
 	public Long getUserId(){
 		return userId;
+	}
+	
+	public Long getAptId(){
+		return aptId;
 	}
 	
 	public String getTitle(){
@@ -74,7 +86,23 @@ public class RepairRequest {
 		return priority;
 	}
 	
+	public boolean isRead(){
+		return isRead;
+	}
 	
+	public void setRead(boolean flag){
+		isRead = flag;
+	}
+	
+	@Override
+	public int compareTo(RepairRequest other) {
+		if (other.createDate.after(createDate)) {
+			return 1;
+		} else if (other.createDate.before(createDate)) {
+			return -1;
+		}
+		return 0;
+	}
 
 }
 

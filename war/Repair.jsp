@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="com.yun.homeplusplus.Resident" %>
+<%@ page import="com.yun.homeplusplus.RepairRequest" %>
 <%@ page import="com.yun.homeplusplus.Manager" %>
 <%@ page import="com.yun.homeplusplus.OfyService" %>
 
@@ -14,7 +14,7 @@
 <HTML lang="en">
 <HEAD>
     <meta charset="utf-8">
-	<TITLE>Home++ - Manage</TITLE>
+	<TITLE>Home++ - Repair Request</TITLE>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -22,38 +22,35 @@
   
 <BODY>
 
-       <form name="residents" action="delRes" method="get">  
+	<form name="requests" action="delReq" method="get">  
         <table>
-        <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
+        <tr><td>Apartment Number</td><td>Title</td><td>Content</td><td>Priority</td><<td>Delete</td>/tr>
 <%
-		String aptName = request.getParameter("AptName");
 		String aptIdString = request.getParameter("AptId");
 		Long aptId = Long.parseLong(aptIdString);
 		
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
-		List<Resident> residents = OfyService.ofy().load().type(Resident.class).list();
-		//Collections.sort(residents);
+		List<RepairRequest> th = OfyService.ofy().load().type(RepairRequest.class).list();
+		Collections.sort(th);
         
-		for (Resident r : residents ) {
+		for (RepairRequest r : th ) {
 		  // APT: calls to System.out.println go to the console, calls to out.println go to the html returned to browser
 		  // the line below is useful when debugging (jsp or servlet)
 		  // ERROR: java.lang.NullPointerException
 		  //System.out.println("s = " + s);
 		  if (r.getAptId().equals(aptId)){
 		  %>
-		  <tr><td><%= r.getName()%></td> 
-		  <td><%=r.getAge()%></td>
-		  <td><%=r.getRoomNumber() %></td>
-		  <td><label class="checkbox"><input type="checkbox" name="<%= r.getId() %>"></label></td><tr>
+		  <tr><td><%= r.getRoomNumber()%></td> 
+		  <td><%=r.getTitle()%></td>
+		  <td><%=r.getContent() %></td>
+		  <td><%=r.getPriority()%></td><tr>
+		  <td><label class="checkbox"><input type="checkbox" name="<%= r.getRequestId() %>"></label></td><tr>
 
 <% }} %>
 		
 	  </table>
-	<input type="hidden" name="AptId" value="<%=aptId %>">
-	<input type="submit" class="btn" value="Delete Checked">
+	  <input type="hidden" name="AptId" value="<%=aptId %>">
+	  <input type="submit" class="btn" value="Delete Checked">
 	</form>
-	<button onclick="location.href='/Create.jsp?AptId='+<%=aptId %>;">Create Residents</button>
-	
-
 </BODY>
 </HTML>

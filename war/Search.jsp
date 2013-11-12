@@ -14,7 +14,7 @@
 <HTML lang="en">
 <HEAD>
     <meta charset="utf-8">
-	<TITLE>Home++ - Manage</TITLE>
+	<TITLE>Home++ - Search</TITLE>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -22,7 +22,20 @@
   
 <BODY>
 
-       <form name="residents" action="delRes" method="get">  
+
+ 	<form class="form-search-by-room-number">
+ 		<p>Search by room number:</p>
+  	    <input type="text" id="room-number" name="room-number">
+  	    <input type="submit" class="btn" value="Search">
+    </form>
+    
+    <form class="form-search-by-user">
+ 		<p>Search by residents' name:</p>
+  	    <input type="text" id="user-name" name="user-name">
+  	    <input type="submit" class="btn" value="Search">
+    </form>
+    
+    <form name="residents" action="delete" method="get">  
         <table>
         <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
 <%
@@ -30,6 +43,8 @@
 		String aptIdString = request.getParameter("AptId");
 		Long aptId = Long.parseLong(aptIdString);
 		
+		String roomNumString = request.getParameter("room-number");
+		String userName = request.getParameter("user-name");
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		List<Resident> residents = OfyService.ofy().load().type(Resident.class).list();
 		//Collections.sort(residents);
@@ -40,20 +55,35 @@
 		  // ERROR: java.lang.NullPointerException
 		  //System.out.println("s = " + s);
 		  if (r.getAptId().equals(aptId)){
+			  if(roomNumString!=null && !roomNumString.isEmpty()){
+				  Integer roomNum = Integer.parseInt(roomNumString);
+				  if(roomNum.equals( r.getRoomNumber())){
 		  %>
 		  <tr><td><%= r.getName()%></td> 
 		  <td><%=r.getAge()%></td>
 		  <td><%=r.getRoomNumber() %></td>
 		  <td><label class="checkbox"><input type="checkbox" name="<%= r.getId() %>"></label></td><tr>
 
-<% }} %>
+<% 				}
+			}else if(userName!=null && !userName.isEmpty()){
+				if(userName.equals(r.getName())){
+					  %>
+					  <tr><td><%= r.getName()%></td> 
+					  <td><%=r.getAge()%></td>
+					  <td><%=r.getRoomNumber() %></td>
+					  <td><label class="checkbox"><input type="checkbox" name="<%= r.getId() %>"></label></td><tr>
+
+			<% 
+				}
+			}
+		  }
+		}
+		%>
 		
 	  </table>
 	<input type="hidden" name="AptId" value="<%=aptId %>">
 	<input type="submit" class="btn" value="Delete Checked">
 	</form>
-	<button onclick="location.href='/Create.jsp?AptId='+<%=aptId %>;">Create Residents</button>
-	
 
-</BODY>
-</HTML>
+  </body>
+</html>

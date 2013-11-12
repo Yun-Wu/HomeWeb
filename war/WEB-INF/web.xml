@@ -37,13 +37,23 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>DeleteServlet</servlet-name>
+    <servlet-name>DeleteResidentServlet</servlet-name>
     <servlet-class>com.yun.homeplusplus.DeleteResidentServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>DeleteServlet</servlet-name>
-    <url-pattern>/delete</url-pattern>
+    <servlet-name>DeleteResidentServlet</servlet-name>
+    <url-pattern>/delRes</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DeleteRequestServlet</servlet-name>
+    <servlet-class>com.yun.homeplusplus.DeleteRequestServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DeleteRequestServlet</servlet-name>
+    <url-pattern>/delReq</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
