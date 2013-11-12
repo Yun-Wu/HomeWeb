@@ -50,7 +50,6 @@ public class RegisterServlet extends HttpServlet {
 		
 		ofy().save().entity(m).now();
 		System.out.println("Register Successfully");
-		System.out.println(managers);
 		resp.sendRedirect("/index.html"); 
 	}
 }

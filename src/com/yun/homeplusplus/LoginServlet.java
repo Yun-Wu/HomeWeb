@@ -15,9 +15,10 @@ public class LoginServlet extends HttpServlet {
 		String password = req.getParameter("password");
 //		System.out.println(Email);
 //		System.out.println(password);
-
 		List<Manager> managers = OfyService.ofy().load().type(Manager.class)
 				.list();
+
+		System.out.println(managers);
 		if (!managers.isEmpty()) {
 			for (Manager m : managers) {
 				System.out.println(m.getEmail() + " " + m.getPassword());

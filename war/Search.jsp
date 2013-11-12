@@ -22,27 +22,38 @@
   
 <BODY>
 
+<%
+		String aptName = request.getParameter("AptName");
+		String aptIdString = request.getParameter("AptId");
+		Long aptId = Long.parseLong(aptIdString);
+		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
+		%>
+		
+	<a href="Manage.jsp<%=parameters %>">Manage</a>
+	<a href="Repair.jsp<%=parameters %>">Repair Request</a>
+	<a href="Message.jsp<%=parameters %>">Message</a>
+	<a href="Search.jsp<%=parameters %>">Search</a>
 
  	<form class="form-search-by-room-number">
  		<p>Search by room number:</p>
   	    <input type="text" id="room-number" name="room-number">
   	    <input type="submit" class="btn" value="Search">
+  	    <input type="hidden" name="AptName" value="<%=aptName %>">
+  	    <input type="hidden" name="AptId" value="<%=aptId %>">
     </form>
     
     <form class="form-search-by-user">
  		<p>Search by residents' name:</p>
   	    <input type="text" id="user-name" name="user-name">
   	    <input type="submit" class="btn" value="Search">
+  	    <input type="hidden" name="AptName" value="<%=aptName %>">
+  	    <input type="hidden" name="AptId" value="<%=aptId %>">
     </form>
     
-    <form name="residents" action="delete" method="get">  
+    <form name="residents" action="delRes" method="get">  
         <table>
         <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
-<%
-		String aptName = request.getParameter("AptName");
-		String aptIdString = request.getParameter("AptId");
-		Long aptId = Long.parseLong(aptIdString);
-		
+<%	
 		String roomNumString = request.getParameter("room-number");
 		String userName = request.getParameter("user-name");
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
@@ -66,7 +77,7 @@
 
 <% 				}
 			}else if(userName!=null && !userName.isEmpty()){
-				if(userName.equals(r.getName())){
+				if(r.getName().indexOf(userName) != -1){
 					  %>
 					  <tr><td><%= r.getName()%></td> 
 					  <td><%=r.getAge()%></td>

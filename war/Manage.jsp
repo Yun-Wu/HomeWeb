@@ -21,15 +21,23 @@
 </head>
   
 <BODY>
-
-       <form name="residents" action="delRes" method="get">  
-        <table>
-        <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
 <%
 		String aptName = request.getParameter("AptName");
 		String aptIdString = request.getParameter("AptId");
 		Long aptId = Long.parseLong(aptIdString);
+		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
+		%>
 		
+	<a href="Manage.jsp<%=parameters %>">Manage</a>
+	<a href="Repair.jsp<%=parameters %>">Repair Request</a>
+	<a href="Message.jsp<%=parameters %>">Message</a>
+	<a href="Search.jsp<%=parameters %>">Search</a>
+
+    <form name="residents" action="delRes" method="get">  
+        <table>
+        <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
+
+<%		
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		List<Resident> residents = OfyService.ofy().load().type(Resident.class).list();
 		//Collections.sort(residents);

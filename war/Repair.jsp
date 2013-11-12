@@ -21,14 +21,22 @@
 </head>
   
 <BODY>
+<%
+		String aptName = request.getParameter("AptName");
+		String aptIdString = request.getParameter("AptId");
+		Long aptId = Long.parseLong(aptIdString);
+		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
+		%>
+		
+	<a href="Manage.jsp<%=parameters %>">Manage</a>
+	<a href="Repair.jsp<%=parameters %>">Repair Request</a>
+	<a href="Message.jsp<%=parameters %>">Message</a>
+	<a href="Search.jsp<%=parameters %>">Search</a>
 
 	<form name="requests" action="delReq" method="get">  
         <table>
-        <tr><td>Apartment Number</td><td>Title</td><td>Content</td><td>Priority</td><<td>Delete</td>/tr>
-<%
-		String aptIdString = request.getParameter("AptId");
-		Long aptId = Long.parseLong(aptIdString);
-		
+        <tr><td>Apartment Number</td><td>Title</td><td>Content</td><td>Priority</td><td>Delete</td></tr>
+<%	
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		List<RepairRequest> th = OfyService.ofy().load().type(RepairRequest.class).list();
 		Collections.sort(th);
@@ -49,6 +57,7 @@
 <% }} %>
 		
 	  </table>
+	  <input type="hidden" name="AptName" value="<%=aptName %>">
 	  <input type="hidden" name="AptId" value="<%=aptId %>">
 	  <input type="submit" class="btn" value="Delete Checked">
 	</form>
