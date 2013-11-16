@@ -18,10 +18,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/justified-nav.css" rel="stylesheet">
+
 </head>
   
 <BODY>
-
+<div class="container">
 <%
 		String aptName = request.getParameter("AptName");
 		String aptIdString = request.getParameter("AptId");
@@ -29,29 +36,35 @@
 		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
 		%>
 		
-	<a href="Manage.jsp<%=parameters %>">Manage</a>
-	<a href="Repair.jsp<%=parameters %>">Repair Request</a>
-	<a href="Message.jsp<%=parameters %>">Message</a>
-	<a href="Search.jsp<%=parameters %>">Search</a>
-
- 	<form class="form-search-by-room-number">
- 		<p>Search by room number:</p>
+	<!-- Justified navbar -->
+	<div class="masthead">
+    	<h3 class="text-muted">Home ++</h3>
+        <ul class="nav nav-justified">
+        	<li><a href="Manage.jsp<%=parameters %>">Manage</a></li>
+            <li><a href="Repair.jsp<%=parameters %>">Repair Request</a></li>
+            <li><a href="Message.jsp<%=parameters %>">Message</a></li>
+            <li class="active"><a href="Search.jsp<%=parameters %>">Search</a></li>
+        </ul>
+    </div>
+    <br>
+ 	<form name="form-search-by-room-number">
+ 		<label>Search by room number:</label>
   	    <input type="text" id="room-number" name="room-number">
-  	    <input type="submit" class="btn" value="Search">
+  	    <input type="submit" class="btn btn-primary" value="Search">
   	    <input type="hidden" name="AptName" value="<%=aptName %>">
   	    <input type="hidden" name="AptId" value="<%=aptId %>">
     </form>
     
-    <form class="form-search-by-user">
- 		<p>Search by residents' name:</p>
+    <form name="form-search-by-user">
+ 		<label>Search by residents' name:</label>
   	    <input type="text" id="user-name" name="user-name">
-  	    <input type="submit" class="btn" value="Search">
+  	    <input type="submit" class="btn btn-primary" value="Search">
   	    <input type="hidden" name="AptName" value="<%=aptName %>">
   	    <input type="hidden" name="AptId" value="<%=aptId %>">
     </form>
     
     <form name="residents" action="delRes" method="get">  
-        <table>
+        <table class="table table-hover">
         <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
 <%	
 		String roomNumString = request.getParameter("room-number");
@@ -93,8 +106,10 @@
 		
 	  </table>
 	<input type="hidden" name="AptId" value="<%=aptId %>">
-	<input type="submit" class="btn" value="Delete Checked">
+	<input type="submit" class="btn btn-primary" value="Delete Checked">
 	</form>
+	
+	</div><!-- close container -->
 
   </body>
 </html>

@@ -18,9 +18,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/justified-nav.css" rel="stylesheet">
 </head>
   
 <BODY>
+  <div class="container">
 <%
 		String aptName = request.getParameter("AptName");
 		String aptIdString = request.getParameter("AptId");
@@ -28,13 +33,20 @@
 		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
 		%>
 		
-	<a href="Manage.jsp<%=parameters %>">Manage</a>
-	<a href="Repair.jsp<%=parameters %>">Repair Request</a>
-	<a href="Message.jsp<%=parameters %>">Message</a>
-	<a href="Search.jsp<%=parameters %>">Search</a>
+		<!-- Justified navbar -->
+	<div class="masthead">
+    	<h3 class="text-muted">Home ++</h3>
+        <ul class="nav nav-justified">
+        	<li><a href="Manage.jsp<%=parameters %>">Manage</a></li>
+            <li class="active"><a href="Repair.jsp<%=parameters %>">Repair Request</a></li>
+            <li><a href="Message.jsp<%=parameters %>">Message</a></li>
+            <li><a href="Search.jsp<%=parameters %>">Search</a></li>
+        </ul>
+    </div>
+    <br>
 
-	<form name="requests" action="delReq" method="get">  
-        <table>
+	<form name="requests" action="delReq" method="get"> 
+      <table class="table table-hover">
         <tr><td>Apartment Number</td><td>Title</td><td>Content</td><td>Priority</td><td>Delete</td></tr>
 <%	
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
@@ -56,10 +68,10 @@
 
 <% }} %>
 		
-	  </table>
+	    </table>
 	  <input type="hidden" name="AptName" value="<%=aptName %>">
 	  <input type="hidden" name="AptId" value="<%=aptId %>">
-	  <input type="submit" class="btn" value="Delete Checked">
+	  <input type="submit" class="btn btn-primary" value="Delete Checked">
 	</form>
 </BODY>
 </HTML>

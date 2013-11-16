@@ -25,6 +25,7 @@
     <!-- Custom styles for this template -->
     <link href="css/justified-nav.css" rel="stylesheet">
 
+    
 </head>
   
 <BODY>
@@ -50,13 +51,28 @@
     </div>
 	
 	<br>
-	<label>From: </label>
-	<input type="email" value="<%=m.getEmail() %>"><br>
-	<label>To: </label>
-	<input type="text" name="receiver" multiple><br>
-	<label>Subject: </label>
-	<input type="text" name="subject" autofocus><br>
-	<input type="text" name="content" maxlength="100" size="100"><br>
-</div>
+	<form role="form" class="form-horizontal" name="sendMsg" method="get">
+	  <div class="form-group">
+		<label class="col-sm-1 control-label" for="from" >From: </label>
+		<div class="col-sm-11">
+		  <input type="text" class="form-control" name="from" id="from" value="<%=m.getAptName() %>">
+	    </div>
+	  </div>
+	  <div class="form-group">
+		<label class="col-sm-1 control-label" for="to" >To: </label>
+		<div class="col-sm-11">
+		  <input type="text" class="form-control" name="to" id="to" multiple>
+	    </div>
+	  </div>
+	  <div class="form-group">
+		<label class="col-sm-1 control-label" for="subject" >Subject: </label>
+		<div class="col-sm-11">
+		  <input type="text" class="form-control" name="subject" id="subject" autofucus>
+	    </div>
+	  </div>
+	  <textarea class="form-control" rows="5"></textarea><br>
+	  <input type="submit" class="btn btn-primary" value="Send">
+	</form>
+</div><!-- close container -->
 </BODY>
 </HTML>

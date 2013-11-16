@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("serial")
 public class CreateResidentServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -34,7 +35,7 @@ public class CreateResidentServlet extends HttpServlet {
 		}
 		Integer age = Integer.parseInt(ageString);
 		Integer room = Integer.parseInt(roomString);
-
+		
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		
 		Resident r = new Resident(room, Email, name, m.getState(), m.getCity(), 

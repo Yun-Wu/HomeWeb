@@ -18,9 +18,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/justified-nav.css" rel="stylesheet">
 </head>
   
 <BODY>
+  <div class="container">
+
 <%
 		String aptName = request.getParameter("AptName");
 		String aptIdString = request.getParameter("AptId");
@@ -28,13 +34,20 @@
 		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
 		%>
 		
-	<a href="Manage.jsp<%=parameters %>">Manage</a>
-	<a href="Repair.jsp<%=parameters %>">Repair Request</a>
-	<a href="Message.jsp<%=parameters %>">Message</a>
-	<a href="Search.jsp<%=parameters %>">Search</a>
+		<!-- Justified navbar -->
+	<div class="masthead">
+    	<h3 class="text-muted">Home ++</h3>
+        <ul class="nav nav-justified">
+        	<li class="active"><a href="Manage.jsp<%=parameters %>">Manage</a></li>
+            <li><a href="Repair.jsp<%=parameters %>">Repair Request</a></li>
+            <li><a href="Message.jsp<%=parameters %>">Message</a></li>
+            <li><a href="Search.jsp<%=parameters %>">Search</a></li>
+        </ul>
+    </div>
+    <br>
 
     <form name="residents" action="delRes" method="get">  
-        <table>
+        <table class="table table-hover">
         <tr><td>Name</td><td>Age</td><td>Apartment Number</td><td>Delete</td></tr>
 
 <%		
@@ -56,12 +69,15 @@
 
 <% }} %>
 		
-	  </table>
+	    </table>
 	<input type="hidden" name="AptId" value="<%=aptId %>">
-	<input type="submit" class="btn" value="Delete Checked">
-	</form>
-	<button onclick="location.href='/Create.jsp?AptId='+<%=aptId %>;">Create Residents</button>
+
 	
+	<input type="submit" class="btn btn-primary" value="Delete Checked">
+	</form>
+	<button class="btn btn-primary"  onclick="location.href='/Create.jsp?AptId='+<%=aptId %>;">Create Residents</button>
+
+  </div><!-- close container -->	
 
 </BODY>
 </HTML>

@@ -17,10 +17,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron.css" rel="stylesheet">
 </head>
   
 <BODY>
-
+  <div class="container">
+  <div class="jumbotron">
+    <h2>Create a new resident</h2>
+    <br>
 <%
 		String aptIdString = request.getParameter("AptId");
 		Long aptId = Long.parseLong(aptIdString);
@@ -28,22 +35,44 @@
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
  %>
 		
-   <form name="CreateResident" action="/create" method="get">
-   		<label>Name: </label>
-		<input type="text" name="name"><br>
-		<label>Room Number: </label>
-		<input type="text" name="room"><br>
-		<label>Age: </label>
-		<input type="text" name="age"><br>
-		<label>Gender: </label>
-		<input type="text" name="gender"><br>
-		<label>Email: </label>
-		<input type="email" name="email"><br>
+   <form role="form" class="form-horizontal" name="CreateResident" action="/create" method="get">
+	  <div class="form-group">
+		<label class="col-sm-4 control-label" for="name" >Name: </label>
+		<div class="col-sm-7">
+		  <input type="text" class="form-control" name="name" id="name">
+	    </div>
+	  </div>
+	  <div class="form-group">
+		<label class="col-sm-4 control-label" for="room" >Room Number: </label>
+		<div class="col-sm-7">
+		  <input type="text" class="form-control" name="room" id="room">
+	    </div>
+	  </div>
+	  <div class="form-group">
+		<label class="col-sm-4 control-label" for="age" >Age: </label>
+		<div class="col-sm-7">
+		  <input type="text" class="form-control" name="age" id="age">
+	    </div>
+	  </div>
+	  <div class="form-group">
+		<label class="col-sm-4 control-label" for="gender" >Gender: </label>
+		<div class="col-sm-7">
+		  <input type="text" class="form-control" name="gender" id="gender">
+	    </div>
+	  </div>
+	  <div class="form-group">
+		<label class="col-sm-4 control-label" for="email" >Email: </label>
+		<div class="col-sm-7">
+		  <input type="email" class="form-control" name="email" id="email">
+	    </div>
+	  </div>
 		
 		<input type="hidden" name="AptId" value="<%=aptId %>">
-		<input type="submit" class="btn" value="Create">
+		<input type="submit" class="btn btn-primary" value="Create">
   	</form>
-
+  
+  </div><!-- close jumbotron -->
+  </div><!-- close container -->
 
 </BODY>
 </HTML>
