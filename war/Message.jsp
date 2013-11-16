@@ -26,6 +26,9 @@
 		String aptIdString = request.getParameter("AptId");
 		Long aptId = Long.parseLong(aptIdString);
 		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
+		
+		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
+		
 		%>
 		
 	<a href="Manage.jsp<%=parameters %>">Manage</a>
@@ -33,6 +36,14 @@
 	<a href="Message.jsp<%=parameters %>">Message</a>
 	<a href="Search.jsp<%=parameters %>">Search</a>
 	
+	<br>
+	<label>From: </label>
+	<input type="email" value="<%=m.getEmail() %>"><br>
+	<label>To: </label>
+	<input type="text" name="receiver" multiple><br>
+	<label>Subject: </label>
+	<input type="text" name="subject" autofocus><br>
+	<input type="text" name="content" maxlength="100" size="100"><br>
 
 </BODY>
 </HTML>

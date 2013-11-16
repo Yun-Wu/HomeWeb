@@ -38,7 +38,7 @@
 		<label>Gender: </label>
 		<input type="text" name="gender"><br>
 		<label>Email: </label>
-		<input type="text" name="email"><br>
+		<input type="email" name="email"><br>
 		
 		<input type="hidden" name="AptId" value="<%=aptId %>">
 		<input type="submit" class="btn" value="Create">
