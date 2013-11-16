@@ -14,13 +14,21 @@
 <HTML lang="en">
 <HEAD>
     <meta charset="utf-8">
-	<TITLE>Home++ - Manage</TITLE>
+	<TITLE>Home++ - Message</TITLE>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/justified-nav.css" rel="stylesheet">
+
 </head>
   
 <BODY>
+<div class="container">
 <%
 		String aptName = request.getParameter("AptName");
 		String aptIdString = request.getParameter("AptId");
@@ -30,11 +38,16 @@
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		
 		%>
-		
-	<a href="Manage.jsp<%=parameters %>">Manage</a>
-	<a href="Repair.jsp<%=parameters %>">Repair Request</a>
-	<a href="Message.jsp<%=parameters %>">Message</a>
-	<a href="Search.jsp<%=parameters %>">Search</a>
+	<!-- Justified navbar -->
+	<div class="masthead">
+    	<h3 class="text-muted">Home ++</h3>
+        <ul class="nav nav-justified">
+        	<li><a href="Manage.jsp<%=parameters %>">Manage</a></li>
+            <li><a href="Repair.jsp<%=parameters %>">Repair Request</a></li>
+            <li class="active"><a href="Message.jsp<%=parameters %>">Message</a></li>
+            <li><a href="Search.jsp<%=parameters %>">Search</a></li>
+        </ul>
+    </div>
 	
 	<br>
 	<label>From: </label>
@@ -44,6 +57,6 @@
 	<label>Subject: </label>
 	<input type="text" name="subject" autofocus><br>
 	<input type="text" name="content" maxlength="100" size="100"><br>
-
+</div>
 </BODY>
 </HTML>
