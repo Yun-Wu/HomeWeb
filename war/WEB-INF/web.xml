@@ -56,6 +56,16 @@
     <url-pattern>/delReq</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+      <servlet-name>CreateMessageServlet</servlet-name>
+      <servlet-class>com.yun.homeplusplus.CreateMessageServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>CreateMessageServlet</servlet-name>
+      <url-pattern>/sendMsg</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

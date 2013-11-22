@@ -51,7 +51,7 @@
     </div>
 	
 	<br>
-	<form role="form" class="form-horizontal" name="sendMsg" method="get">
+	<form role="form" class="form-horizontal" name="sendMsg" action="/sendMsg" method="get">
 	  <div class="form-group">
 		<label class="col-sm-1 control-label" for="from" >From: </label>
 		<div class="col-sm-11">
@@ -70,7 +70,11 @@
 		  <input type="text" class="form-control" name="subject" id="subject" autofucus>
 	    </div>
 	  </div>
-	  <textarea class="form-control" rows="5"></textarea><br>
+	  <textarea class="form-control" rows="5" name="content"></textarea><br>
+	  
+  	  <input type="hidden" name="AptName" value="<%=aptName %>">
+  	  <input type="hidden" name="AptId" value="<%=aptId %>">
+	  
 	  <input type="submit" class="btn btn-primary" value="Send">
 	</form>
 </div><!-- close container -->
