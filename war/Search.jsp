@@ -24,6 +24,11 @@
 
     <!-- Custom styles for this template -->
     <link href="css/justified-nav.css" rel="stylesheet">
+    
+    <link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    
+    <script src="js/jquery-1.9.1.js"></script>
+	<script src="js/jquery-ui-1.10.3.custom.js"></script>
 
 </head>
   
@@ -42,7 +47,7 @@
         <ul class="nav nav-justified">
         	<li><a href="Manage.jsp<%=parameters %>">Manage</a></li>
             <li><a href="Repair.jsp<%=parameters %>">Repair Request</a></li>
-            <li><a href="Message.jsp<%=parameters %>">Message</a></li>
+            <li><a href="Message.jsp<%=parameters %>&Receiver=">Message</a></li>
             <li class="active"><a href="Search.jsp<%=parameters %>">Search</a></li>
         </ul>
     </div>
@@ -92,7 +97,7 @@
 			}else if(userName!=null && !userName.isEmpty()){
 				if(r.getName().indexOf(userName) != -1){
 					  %>
-					  <tr><td><%= r.getName()%></td> 
+					  <tr><td><a href="Message.jsp<%=parameters %>&Receiver=<%= r.getName()%>"><%= r.getName()%></a></td> 
 					  <td><%=r.getAge()%></td>
 					  <td><%=r.getRoomNumber() %></td>
 					  <td><label class="checkbox"><input type="checkbox" name="<%= r.getId() %>"></label></td><tr>
@@ -110,6 +115,21 @@
 	</form>
 	
 	</div><!-- close container -->
+	 <script>
 
+	 $(function() {
+var availableTags = new Array();
+var j=0;
+<% 
+for (Resident r : residents ) { %>
+	availableTags[j] = "<%= r.getName() %>";
+    j++;
+<%}%>
+
+$( "#user-name" ).autocomplete({
+	source: availableTags
+	});
+	 });
+</script>
   </body>
 </html>

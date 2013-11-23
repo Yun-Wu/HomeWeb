@@ -40,7 +40,7 @@
         <ul class="nav nav-justified">
         	<li class="active"><a href="Manage.jsp<%=parameters %>">Manage</a></li>
             <li><a href="Repair.jsp<%=parameters %>">Repair Request</a></li>
-            <li><a href="Message.jsp<%=parameters %>">Message</a></li>
+            <li><a href="Message.jsp<%=parameters %>&Receiver=">Message</a></li>
             <li><a href="Search.jsp<%=parameters %>">Search</a></li>
         </ul>
     </div>
@@ -62,7 +62,7 @@
 		  //System.out.println("s = " + s);
 		  if (r.getAptId().equals(aptId)){
 		  %>
-		  <tr><td><%= r.getName()%></td> 
+		  <tr><td><a href="Message.jsp<%=parameters %>&Receiver=<%= r.getName()%>"><%= r.getName()%></a></td> 
 		  <td><%=r.getAge()%></td>
 		  <td><%=r.getRoomNumber() %></td>
 		  <td><label class="checkbox"><input type="checkbox" name="<%= r.getId() %>"></label></td><tr>

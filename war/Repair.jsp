@@ -39,7 +39,7 @@
         <ul class="nav nav-justified">
         	<li><a href="Manage.jsp<%=parameters %>">Manage</a></li>
             <li class="active"><a href="Repair.jsp<%=parameters %>">Repair Request</a></li>
-            <li><a href="Message.jsp<%=parameters %>">Message</a></li>
+            <li><a href="Message.jsp<%=parameters %>&Receiver=">Message</a></li>
             <li><a href="Search.jsp<%=parameters %>">Search</a></li>
         </ul>
     </div>
