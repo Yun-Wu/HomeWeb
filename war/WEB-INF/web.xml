@@ -66,6 +66,45 @@
       <url-pattern>/sendMsg</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+      <servlet-name>LoginApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.ClientLoginApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>LoginApi</servlet-name>
+      <url-pattern>/loginapi</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+      <servlet-name>ReceiveMessageApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.ReceiveMessageApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>ReceiveMessageApi</servlet-name>
+      <url-pattern>/remsgapi</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+      <servlet-name>SentMessageApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.SentMessageApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>SentMessageApi</servlet-name>
+      <url-pattern>/sentmsgapi</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+      <servlet-name>SentRequestApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.SentRequestApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>SentRequestApi</servlet-name>
+      <url-pattern>/sentreqapi</url-pattern>
+  </servlet-mapping>  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

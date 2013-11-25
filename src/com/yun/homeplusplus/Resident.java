@@ -89,6 +89,10 @@ public class Resident {
 		return id;
 	}
 	
+	public String getEmail(){
+		return email;
+	}
+	
 	public void removeFromApt(){
 		
 		apartmentId =null;

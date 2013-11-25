@@ -22,32 +22,37 @@ public class CreateMessageServlet extends HttpServlet {
 		String aptIdString = req.getParameter("AptId");
 		String aptName = req.getParameter("AptName");
 
-		if (receiver.isEmpty() || title.isEmpty() || content.isEmpty()) {
+		if (receiver.isEmpty() || title.isEmpty() || content.isEmpty() || receiverOpt.isEmpty()) {
 			System.out.println("please fill in the form completely");
 			return;
 		}
-
+		
+		Long aptId = Long.parseLong(aptIdString);
 		List<Resident> residents = OfyService.ofy().load().type(Resident.class)
 				.list();
+		
+		System.out.println(receiverOpt);
 
 		if (receiverOpt.equals("individual")) {
 			for (Resident r : residents) {
 				if (r.getName().equals(receiver)) {
-					Message m = new Message(aptName, r.getId(), title, content);
+					Message m = new Message(aptName, aptId, r.getId(), title, content);
 					ofy().save().entity(m).now();
+					System.out.println("create message " + m.getTitle());
+					System.out.println(r.getId());
 					break;
 				}
 			}
 		} else if (receiverOpt.equals("room")) {
 			for (Resident r : residents) {
 				if (r.getRoomNumber() == Integer.parseInt(receiver.trim())) {
-					Message m = new Message(aptName, r.getId(), title, content);
+					Message m = new Message(aptName, aptId, r.getId(), title, content);
 					ofy().save().entity(m).now();
 				}
 			}
 		} else if (receiverOpt.equals("all")) {
 			for (Resident r : residents) {
-				Message m = new Message(aptName, r.getId(), title, content);
+				Message m = new Message(aptName, aptId, r.getId(), title, content);
 				ofy().save().entity(m).now();
 			}
 		}
