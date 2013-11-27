@@ -86,6 +86,10 @@ public class RepairRequest implements Comparable<RepairRequest> {
 		return priority;
 	}
 	
+	public List<String> getImageList(){
+		return pictureUrlList;
+	}
+	
 	public boolean isRead(){
 		return isRead;
 	}

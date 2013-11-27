@@ -2,12 +2,16 @@
 
 <%@ page import="com.yun.homeplusplus.RepairRequest" %>
 <%@ page import="com.yun.homeplusplus.Manager" %>
+<%@ page import="com.yun.homeplusplus.Image" %>
 <%@ page import="com.yun.homeplusplus.OfyService" %>
 
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.text.*" %>
+
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -30,6 +34,8 @@
 		String aptName = request.getParameter("AptName");
 		String aptIdString = request.getParameter("AptId");
 		Long aptId = Long.parseLong(aptIdString);
+		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
+		aptName = m.getAptName();
 		String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
 		%>
 		
@@ -45,33 +51,37 @@
     </div>
     <br>
 
-	<form name="requests" action="delReq" method="get"> 
-      <table class="table table-hover">
-        <tr><td>Apartment Number</td><td>Title</td><td>Content</td><td>Priority</td><td>Delete</td></tr>
-<%	
-		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
-		List<RepairRequest> th = OfyService.ofy().load().type(RepairRequest.class).list();
-		Collections.sort(th);
-        
-		for (RepairRequest r : th ) {
-		  // APT: calls to System.out.println go to the console, calls to out.println go to the html returned to browser
-		  // the line below is useful when debugging (jsp or servlet)
-		  // ERROR: java.lang.NullPointerException
-		  //System.out.println("s = " + s);
-		  if (r.getAptId().equals(aptId)){
-		  %>
-		  <tr><td><%= r.getRoomNumber()%></td> 
-		  <td><a href="ShowRequest.jsp?requestId=<%= r.getRequestId() %>&aptId=<%= aptId %>"> <%= r.getTitle() %></a></td>
-		  <td><%=r.getContent() %></td>
-		  <td><%=r.getPriority()%></td><tr>
-		  <td><label class="checkbox"><input type="checkbox" name="<%= r.getRequestId() %>"></label></td><tr>
+<%
+		BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+		Long requestId = new Long(request.getParameter("requestId"));
+		RepairRequest r = OfyService.ofy().load().type(RepairRequest.class).id(requestId).get();
+%>
+		<div class="jumbotron">
+        <h2><%=r.getTitle()%></h2>
+        <br>
+        <p><%=r.getContent() %></p>
+		<div class="row-fluid">
+		<ul class="thumbnails">
+<%
 
-<% }} %>
-		
-	    </table>
-	  <input type="hidden" name="AptName" value="<%=aptName %>">
-	  <input type="hidden" name="AptId" value="<%=aptId %>">
-	  <input type="submit" class="btn btn-primary" value="Delete Checked">
-	</form>
+		r.setRead(true);
+		OfyService.ofy().save().entity(r).now();
+		List<String> imageUrls = r.getImageList();
+
+		for ( String url : imageUrls ) {
+     		  //out.println("<img src=\"" + img.bkUrl + "\">"); // better to not use println for html output, use templating instead
+     		%>
+     		<li class="span3">
+   			<div class="thumbnail">
+     		<img src="<%= url %>" alt="">
+     		</div>
+    		</li>
+     		<%
+     	 }
+%>
+		    </ul>
+		    </div>
+          </div>
+          </div>		
 </BODY>
 </HTML>
