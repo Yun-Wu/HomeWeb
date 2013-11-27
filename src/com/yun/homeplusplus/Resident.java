@@ -13,7 +13,7 @@ import com.googlecode.objectify.annotation.Id;
 
 
 @Entity
-public class Resident {
+public class Resident implements Comparable<Resident>  {
 	
 	@Id
 	private Long id;
@@ -98,11 +98,10 @@ public class Resident {
 		apartmentId =null;
 		
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public int compareTo(Resident o) {
+		return name.compareTo(o.getName());
+	}
 
 }

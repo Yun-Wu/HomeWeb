@@ -57,7 +57,9 @@
 	  <div class="form-group">
 		<label class="col-sm-4 control-label" for="gender" >Gender: </label>
 		<div class="col-sm-7">
-		  <input type="text" class="form-control" name="gender" id="gender">
+			<input type="radio" name="gender" id="opt1" value="Female" checked> Female
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="gender" id="opt2" value="Male"> Male
 	    </div>
 	  </div>
 	  <div class="form-group">

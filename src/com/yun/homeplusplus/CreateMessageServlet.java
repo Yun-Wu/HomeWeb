@@ -21,9 +21,15 @@ public class CreateMessageServlet extends HttpServlet {
 
 		String aptIdString = req.getParameter("AptId");
 		String aptName = req.getParameter("AptName");
+		
+		if (receiverOpt.equals("all")){
+			receiver = "all";
+		}
 
 		if (receiver.isEmpty() || title.isEmpty() || content.isEmpty() || receiverOpt.isEmpty()) {
 			System.out.println("please fill in the form completely");
+			resp.sendRedirect("/Message.jsp?AptName=" + aptName + "&AptId="
+					+ aptIdString);
 			return;
 		}
 		
@@ -36,7 +42,7 @@ public class CreateMessageServlet extends HttpServlet {
 		if (receiverOpt.equals("individual")) {
 			for (Resident r : residents) {
 				if (r.getName().equals(receiver)) {
-					Message m = new Message(aptName, aptId, r.getId(), title, content);
+					Message m = new Message(aptName, aptId, r.getName(), r.getId(), title, content);
 					ofy().save().entity(m).now();
 					System.out.println("create message " + m.getTitle());
 					System.out.println(r.getId());
@@ -46,17 +52,17 @@ public class CreateMessageServlet extends HttpServlet {
 		} else if (receiverOpt.equals("room")) {
 			for (Resident r : residents) {
 				if (r.getRoomNumber() == Integer.parseInt(receiver.trim())) {
-					Message m = new Message(aptName, aptId, r.getId(), title, content);
+					Message m = new Message(aptName, aptId,r.getName(), r.getId(), title, content);
 					ofy().save().entity(m).now();
 				}
 			}
 		} else if (receiverOpt.equals("all")) {
 			for (Resident r : residents) {
-				Message m = new Message(aptName, aptId, r.getId(), title, content);
+				Message m = new Message(aptName, aptId, r.getName(),r.getId(), title, content);
 				ofy().save().entity(m).now();
 			}
 		}
-		resp.sendRedirect("/Manage.jsp?AptName=" + aptName + "&AptId="
+		resp.sendRedirect("/SentMessage.jsp?AptName=" + aptName + "&AptId="
 				+ aptIdString);
 	}
 }

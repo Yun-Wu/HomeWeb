@@ -53,7 +53,7 @@
 <%		
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		List<Resident> residents = OfyService.ofy().load().type(Resident.class).list();
-		//Collections.sort(residents);
+		Collections.sort(residents);
         
 		for (Resident r : residents ) {
 		  // APT: calls to System.out.println go to the console, calls to out.println go to the html returned to browser

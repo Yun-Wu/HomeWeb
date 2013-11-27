@@ -11,6 +11,7 @@ public class Message implements Comparable<Message>  {
 
 	@Id
 	private Long id;
+	private String receiver;
 	private Long receiverId;
 	private String sender;
 	private Long senderId;
@@ -21,8 +22,9 @@ public class Message implements Comparable<Message>  {
 	
 	private boolean isRead;
 	
-	public Message(String sender, Long senderId, Long receiverId, String title, String content){
+	public Message(String sender, Long senderId, String receiver, Long receiverId, String title, String content){
 		this.sender = sender;
+		this.receiver = receiver;
 		this.receiverId = receiverId;
 		this.title = title;
 		this.content = content;
@@ -34,10 +36,16 @@ public class Message implements Comparable<Message>  {
 	private Message(){
 		
 	}
+	public Long getId(){
+		return id;
+	}
 	public String getSender(){
 		return sender;
 	}
-	public Long getReceiver(){
+	public String getReceiver(){
+		return receiver;
+	}
+	public Long getReceiverId(){
 		return receiverId;
 	}
 	public Long getSenderId(){

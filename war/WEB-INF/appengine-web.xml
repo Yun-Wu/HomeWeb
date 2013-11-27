@@ -3,7 +3,7 @@
 
 <application>homeplusplus-apt</application>
 
-  <version>1</version>
+  <version>2</version>
 
   <!--
     Allows App Engine to send multiple requests to one instance in parallel:

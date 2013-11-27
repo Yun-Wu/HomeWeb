@@ -2,6 +2,7 @@
 
 <%@ page import="com.yun.homeplusplus.Resident"%>
 <%@ page import="com.yun.homeplusplus.Manager"%>
+<%@ page import="com.yun.homeplusplus.Message"%>
 <%@ page import="com.yun.homeplusplus.OfyService"%>
 
 <%@ page import="java.util.List"%>
@@ -38,13 +39,21 @@
 			String aptName = request.getParameter("AptName");
 				String aptIdString = request.getParameter("AptId");
 				Long aptId = Long.parseLong(aptIdString);
-				String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
+
 				
 				String receiver = request.getParameter("Receiver");
 				
 				Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 				
+				aptName = m.getAptName();
+				
+				String parameters = "?AptName=" + aptName + "&AptId=" + aptId;
+				
 				List<Resident> residents = OfyService.ofy().load().type(Resident.class).list();
+				
+				List<Message> messages = OfyService.ofy().load().type(Message.class).list();
+				
+				Collections.sort(messages);
 		%>
 		<!-- Justified navbar -->
 		<div class="masthead">
@@ -58,43 +67,36 @@
 		</div>
 
 		<br>
-		<form role="form" class="form-horizontal" name="sendMsg"
-			action="/sendMsg" method="get">
-			<div class="form-group">
-				<label class="col-sm-1 control-label" for="from">From: </label>
-				<div class="col-sm-11">
-					<input type="text" class="form-control" name="from" id="from"
-						value="<%=m.getAptName()%>">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-1 control-label" for="to">To: </label>
-				<div class="col-sm-11">
-					<input type="text" class="form-control" name="to" id="to" value="<%=receiver%>">
-					<input type="radio" name="receiverOpt" id="opt1" value="individual" checked> Individual 
-					<input type="radio" name="receiverOpt" id="opt2" value="room"> Room
-					<input type="radio" name="receiverOpt" id="opt3" value="all"> All residents
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-1 control-label" for="subject">Subject:
-				</label>
-				<div class="col-sm-11">
-					<input type="text" class="form-control" name="subject" id="subject"
-						autofucus>
-				</div>
-			</div>
-			<textarea class="form-control" rows="5" name="content"></textarea>
-			<br> <input type="hidden" name="AptName" value="<%=aptName%>">
-			<input type="hidden" name="AptId" value="<%=aptId%>"> <input
-				type="submit" class="btn btn-primary" value="Send">
-		</form>
-		<button class="btn btn-primary"  onclick="location.href='/SentMessage.jsp?AptId='+<%=aptId %>;">Previous Message</button>
+		<form name="sentMsg" action="delMsg" method="get">
+			<table class="table table-hover">
+        <tr><td>Receiver</td><td>Title</td><td>Content</td><td>Delete</td></tr>
+
+<%		
+		for (Message msg : messages ) {
+		  // APT: calls to System.out.println go to the console, calls to out.println go to the html returned to browser
+		  // the line below is useful when debugging (jsp or servlet)
+		  // ERROR: java.lang.NullPointerException
+		  //System.out.println("s = " + s);
+		  if (msg.getSenderId().equals(aptId)){
+				Resident r = OfyService.ofy().load().type(Resident.class).id(msg.getReceiverId()).get();
+		  %>
+		  <tr><td><%= r.getName()%></td> 
+		  <td><%=msg.getTitle()%></td>
+		  <td><%=msg.getContent() %></td>
+		  <td><label class="checkbox"><input type="checkbox" name="<%= msg.getId() %>"></label></td><tr>
+
+<% }} %>
 		
+	    </table>
+	<input type="hidden" name="AptId" value="<%=aptId %>">	
+	<input type="submit" class="btn btn-primary" value="Delete Checked">
+		</form>
+	
 	</div>
 	<!-- close container -->
 
 	<script>
+
 	 $(function() {
 var availableNames = new Array();
 var availableRooms = new Array();

@@ -105,6 +105,56 @@
       <servlet-name>SentRequestApi</servlet-name>
       <url-pattern>/sentreqapi</url-pattern>
   </servlet-mapping>  
+  
+    <servlet>
+      <servlet-name>DeleteMessageServlet</servlet-name>
+      <servlet-class>com.yun.homeplusplus.DeleteMessageServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>DeleteMessageServlet</servlet-name>
+      <url-pattern>/delMsg</url-pattern>
+  </servlet-mapping>  
+  
+    <servlet>
+      <servlet-name>UploadImageApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.UploadImageApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>UploadImageApi</servlet-name>
+      <url-pattern>/uploadimgapi</url-pattern>
+  </servlet-mapping>  
+  
+    <servlet>
+      <servlet-name>UploadRequestApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.UploadRequestApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>UploadRequestApi</servlet-name>
+      <url-pattern>/uploadreqapi</url-pattern>
+  </servlet-mapping>  
+  
+      <servlet>
+      <servlet-name>UploadMessageApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.UploadMessageApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>UploadMessageApi</servlet-name>
+      <url-pattern>/uploadmsgapi</url-pattern>
+  </servlet-mapping>  
+  
+  <servlet>
+      <servlet-name>DeleteAllServlet</servlet-name>
+      <servlet-class>com.yun.homeplusplus.DeleteAllServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>DeleteAllServlet</servlet-name>
+      <url-pattern>/delall</url-pattern>
+  </servlet-mapping>  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
