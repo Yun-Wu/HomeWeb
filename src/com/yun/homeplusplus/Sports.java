@@ -59,6 +59,10 @@ public class Sports implements Comparable<Sports> {
 	
 	}
 	
+	private Sports(){
+		
+	}
+	
 	public void signUp(Long userId){
 		
 		participantId.add(userId);

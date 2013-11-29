@@ -80,6 +80,10 @@ public class Carpool implements Comparable<Carpool> {
 		
 	}
 	
+	private Carpool(){
+		
+	}
+	
 	public void signUp(Long userId){
 		
 		participantsId.add(userId);
