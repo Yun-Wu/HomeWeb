@@ -147,6 +147,16 @@
   </servlet-mapping>  
   
   <servlet>
+      <servlet-name>PostServletApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.PostServletApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>PostServletApi</servlet-name>
+      <url-pattern>/postapi</url-pattern>
+  </servlet-mapping>  
+  
+  <servlet>
       <servlet-name>DeleteAllServlet</servlet-name>
       <servlet-class>com.yun.homeplusplus.DeleteAllServlet</servlet-class>
   </servlet>
