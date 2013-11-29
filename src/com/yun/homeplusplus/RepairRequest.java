@@ -25,7 +25,11 @@ public class RepairRequest implements Comparable<RepairRequest> {
 	private Integer priority;
 	private List<String> pictureUrlList;
 	
-	private boolean isRead;
+	private String scheduledDate;  // format  DD/MM/YY		   ex.   27/11/2013
+	private String scheduledTime;  // format  Hour in 24:min   ex.   17:05
+	
+	private Integer responded;	   // 1: responded by management office
+								   // 0; unresponded
 	
 	
 	public RepairRequest(Long userId, Long aptId, String userName, String title, String content, Integer priority,
@@ -41,7 +45,10 @@ public class RepairRequest implements Comparable<RepairRequest> {
 		this.priority = priority;
 		this.pictureUrlList = pictureUrlList;
 		createDate = new Date();
-		this.isRead = false;
+		
+		scheduledTime = "N/A";  // initialize this value
+		scheduledDate = "N/A";
+		responded = 0;
 		
 	}
 	
@@ -90,13 +97,35 @@ public class RepairRequest implements Comparable<RepairRequest> {
 		return pictureUrlList;
 	}
 	
-	public boolean isRead(){
-		return isRead;
+public String getScheduledDate(){
+		
+		return scheduledDate;
 	}
 	
-	public void setRead(boolean flag){
-		isRead = flag;
+	public String getScheduledTime(){
+		return scheduledTime;
 	}
+	
+	public Integer getResponded(){
+		
+		return responded;
+		
+	}
+	public void setScheduledDate(String date){
+		
+		scheduledDate = date;
+		
+	}
+	
+	public void setScheduledTime(String time){
+		
+		scheduledTime = time;
+	}
+	
+	public void setResponded(){
+		responded = 1;
+	}
+
 	
 	@Override
 	public int compareTo(RepairRequest other) {

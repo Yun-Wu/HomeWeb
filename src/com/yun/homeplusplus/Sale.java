@@ -8,27 +8,32 @@ import com.googlecode.objectify.annotation.Id;
 
 
 @Entity
-public class Sale {
+public class Sale implements Comparable<Sale> {
 	
 	@Id
 	private Long id;
 	private Long userId;
+	private String userName;
 	private Long apartmentId;
 	
 	private String title;
 	private String description;
 	private Integer price;
-	private List<String> pictureUrlList;
+	private String coverUrl;
+	private String pictureUrl;
 	
 	
-	public Sale(Long userId, Long apartmentId, String title, String description, Integer price, List<String> pictureUrlList){
+	public Sale(Long userId, String userName, Long apartmentId, String title, String description, Integer price, 
+			String pictureUrl, String coverUrl){
 		
 		this.userId = userId;
+		this.userName = userName;
 		this.apartmentId = apartmentId;
 		this.title = title;
 		this.description = description;
 		this.price = price;
-		this.pictureUrlList = pictureUrlList;
+		this.pictureUrl = pictureUrl;
+		this.coverUrl = coverUrl;
 		
 	}
 	
@@ -61,6 +66,28 @@ public class Sale {
 	public Long getId(){
 		return id;
 	}
+	
+	public String getCoverUrl(){
+		
+		return coverUrl;
+		
+	}
+	
+	public String getUserName(){
+		return userName;
+	}
+	
+	public String getPictureUrl(){
+		return pictureUrl;
+	}
+
+	@Override
+	public int compareTo(Sale another) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 	
 
 }

@@ -20,6 +20,8 @@ public class Message implements Comparable<Message>  {
 	private String content;
 	private Date createDate;
 	
+	private String coverUrl;
+	
 	private boolean isRead;
 	
 	public Message(String sender, Long senderId, String receiver, Long receiverId, String title, String content){
@@ -59,6 +61,9 @@ public class Message implements Comparable<Message>  {
 	}
 	public void setRead(boolean flag){
 		this.isRead = flag;
+	}
+	public void setUrl(String url){
+		this.coverUrl = url;
 	}
 	
 	@Override

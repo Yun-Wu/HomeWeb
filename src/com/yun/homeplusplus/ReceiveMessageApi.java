@@ -22,7 +22,7 @@ public class ReceiveMessageApi extends HttpServlet {
 		List<Message> result = new ArrayList<Message>();
 
 		for (Message m : messages) {
-			if (m.getReceiver().equals(id)) {
+			if (m.getReceiverId().equals(id)) {
 				result.add(m);
 			}
 		}
