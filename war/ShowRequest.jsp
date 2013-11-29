@@ -64,7 +64,6 @@
 		<ul class="thumbnails">
 <%
 
-		r.setRead(true);
 		OfyService.ofy().save().entity(r).now();
 		List<String> imageUrls = r.getImageList();
 
