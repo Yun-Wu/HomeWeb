@@ -104,6 +104,10 @@ public class Carpool implements Comparable<Carpool> {
 	public String getCoverUrl(){
 		return coverUrl;
 	}
+	
+	public Long getApartmentId(){
+		return apartmentId;
+	}
 
 	@Override
 	public int compareTo(Carpool another) {

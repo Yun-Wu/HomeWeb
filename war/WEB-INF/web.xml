@@ -156,6 +156,16 @@
       <url-pattern>/postapi</url-pattern>
   </servlet-mapping>  
   
+    <servlet>
+      <servlet-name>GetServletApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.GetServletApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>GetServletApi</servlet-name>
+      <url-pattern>/getapi</url-pattern>
+  </servlet-mapping>  
+  
   <servlet>
       <servlet-name>DeleteAllServlet</servlet-name>
       <servlet-class>com.yun.homeplusplus.DeleteAllServlet</servlet-class>
