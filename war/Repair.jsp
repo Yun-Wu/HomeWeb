@@ -47,7 +47,7 @@
 
 	<form name="requests" action="delReq" method="get"> 
       <table class="table table-hover">
-        <tr><td>Apartment Number</td><td>Title</td><td>Content</td><td>Priority</td><td>Delete</td></tr>
+        <tr><td>Apartment</td><td>Title</td><td>Content</td><td>Priority</td><td>Delete</td></tr>
 <%	
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		List<RepairRequest> th = OfyService.ofy().load().type(RepairRequest.class).list();
@@ -63,7 +63,7 @@
 		  <tr><td><%= r.getRoomNumber()%></td> 
 		  <td><a href="ShowRequest.jsp?requestId=<%= r.getRequestId() %>&aptId=<%= aptId %>"> <%= r.getTitle() %></a></td>
 		  <td><%=r.getContent() %></td>
-		  <td><%=r.getPriority()%></td><tr>
+		  <td><%=r.getPriority()%></td>
 		  <td><label class="checkbox"><input type="checkbox" name="<%= r.getRequestId() %>"></label></td><tr>
 
 <% }} %>
@@ -73,5 +73,6 @@
 	  <input type="hidden" name="AptId" value="<%=aptId %>">
 	  <input type="submit" class="btn btn-primary" value="Delete Checked">
 	</form>
+	</div>
 </BODY>
 </HTML>

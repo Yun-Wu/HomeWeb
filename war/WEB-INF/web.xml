@@ -175,6 +175,17 @@
       <servlet-name>DeleteAllServlet</servlet-name>
       <url-pattern>/delall</url-pattern>
   </servlet-mapping>  
+  
+    <servlet>
+      <servlet-name>ScheduleRequestServlet</servlet-name>
+      <servlet-class>com.yun.homeplusplus.ScheduleRequestServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>ScheduleRequestServlet</servlet-name>
+      <url-pattern>/scheduleReq</url-pattern>
+  </servlet-mapping>  
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

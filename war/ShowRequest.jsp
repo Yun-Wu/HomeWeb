@@ -2,7 +2,6 @@
 
 <%@ page import="com.yun.homeplusplus.RepairRequest" %>
 <%@ page import="com.yun.homeplusplus.Manager" %>
-<%@ page import="com.yun.homeplusplus.Image" %>
 <%@ page import="com.yun.homeplusplus.OfyService" %>
 
 <%@ page import="java.util.List" %>
@@ -26,13 +25,19 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/justified-nav.css" rel="stylesheet">
+    <link href="css/datepicker.css" rel="stylesheet">
+    
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.js"></script>
 </head>
   
 <BODY>
   <div class="container">
 <%
 		String aptName = request.getParameter("AptName");
-		String aptIdString = request.getParameter("AptId");
+		String aptIdString = request.getParameter("aptId");
 		Long aptId = Long.parseLong(aptIdString);
 		Manager m = OfyService.ofy().load().type(Manager.class).id(aptId).get();
 		aptName = m.getAptName();
@@ -56,31 +61,47 @@
 		Long requestId = new Long(request.getParameter("requestId"));
 		RepairRequest r = OfyService.ofy().load().type(RepairRequest.class).id(requestId).get();
 %>
-		<div class="jumbotron">
-        <h2><%=r.getTitle()%></h2>
-        <br>
-        <p><%=r.getContent() %></p>
+	
+	<h3><%=r.getTitle()%></h3>
+    <p><%=r.getContent() %></p>
+    <p>&nbsp;</p>
+    
+    <div class="container-fluid">
 		<div class="row-fluid">
-		<ul class="thumbnails">
+			<div class="col-lg-4">
 <%
-
-		OfyService.ofy().save().entity(r).now();
 		List<String> imageUrls = r.getImageList();
 
 		for ( String url : imageUrls ) {
      		  //out.println("<img src=\"" + img.bkUrl + "\">"); // better to not use println for html output, use templating instead
      		%>
-     		<li class="span3">
-   			<div class="thumbnail">
-     		<img src="<%= url %>" alt="">
-     		</div>
-    		</li>
+     		<img src="<%= url %>" alt="" class="img-thumbnail">
      		<%
      	 }
 %>
-		    </ul>
 		    </div>
-          </div>
-          </div>		
+			<div class="col-lg-4">
+		    
+			<h4>Schedule</h4>
+	    		<form id="Schedule" class="form-horizontal" action="scheduleReq" method="get">
+	    		Date: <input type="text" class="span2" value="<%=r.getScheduledDate()%>" title="format: dd/mm/yyyy" name="date" id="dp1" >
+    			<br>
+    			Time: <input type="text" class="span2" value="<%=r.getScheduledTime() %>" title="format: hh:mm" name="time">
+    			<br>
+    			<input type="hidden" name="RequestId" value="<%=requestId %>">
+    			<input type="hidden" name="AptId" value="<%=aptId %>">
+    			<br>
+    			<input type="submit" class="btn btn-primary" value="Submit">
+    			</form>
+    		</div>
+    	</div>
+    </div>
+  </div>
+	 <script>
+	 $(function() {
+	 	//$('#dp1').datepicker();
+	 	//$( document ).tooltip();
+	 });
+</script>	
 </BODY>
 </HTML>
