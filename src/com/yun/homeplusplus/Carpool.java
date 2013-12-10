@@ -108,6 +108,10 @@ public class Carpool implements Comparable<Carpool> {
 	public Long getApartmentId(){
 		return apartmentId;
 	}
+	
+	public Long getUserId(){
+		return userId;
+	}
 
 	@Override
 	public int compareTo(Carpool another) {

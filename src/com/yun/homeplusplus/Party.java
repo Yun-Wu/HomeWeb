@@ -89,6 +89,11 @@ public class Party implements Comparable<Party> {
 		return coverUrl;
 	}
 	
+	public List<Long> getParticipantsList(){
+		
+		return participantsId;
+	}
+	
 	
 	@Override
 	public int compareTo(Party another) {

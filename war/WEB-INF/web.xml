@@ -185,6 +185,47 @@
       <servlet-name>ScheduleRequestServlet</servlet-name>
       <url-pattern>/scheduleReq</url-pattern>
   </servlet-mapping>  
+    
+  <servlet>
+      <servlet-name>UpdateInfoApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.UpdateInfoApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>UpdateInfoApi</servlet-name>
+      <url-pattern>/updatInfo</url-pattern>
+  </servlet-mapping>  
+  
+  <servlet>
+      <servlet-name>GetResidentsApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.GetResidentsApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>GetResidentsApi</servlet-name>
+      <url-pattern>/getres</url-pattern>
+  </servlet-mapping>    
+  
+  <servlet>
+      <servlet-name>GetMyEventsApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.GetMyEventsApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>GetMyEventsApi</servlet-name>
+      <url-pattern>/getmyevents</url-pattern>
+  </servlet-mapping>    
+  
+  
+  <servlet>
+      <servlet-name>GetParticipantEventsApi</servlet-name>
+      <servlet-class>com.yun.homeplusplus.GetParticipantEventsApi</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+      <servlet-name>GetParticipantEventsApi</servlet-name>
+      <url-pattern>/getpevents</url-pattern>
+  </servlet-mapping>    
   
   <!-- Default page to serve -->
   <welcome-file-list>

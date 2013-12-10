@@ -62,7 +62,7 @@ public class Sale implements Comparable<Sale> {
 		return apartmentId;
 		
 	}
-	
+
 	public Long getId(){
 		return id;
 	}
