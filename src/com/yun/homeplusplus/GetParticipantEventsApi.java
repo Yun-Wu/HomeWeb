@@ -22,6 +22,8 @@ public class GetParticipantEventsApi extends HttpServlet {
 
 		List<Carpool> cc = OfyService.ofy().load().type(Carpool.class).list();
 		for (Carpool c : cc) {
+			if (c.getParticipantsList()==null || c.getParticipantsList().isEmpty())
+				continue;
 			if (c.getParticipantsList().contains(id)) {
 				myEvents.capools.add(c);
 			}
@@ -29,6 +31,8 @@ public class GetParticipantEventsApi extends HttpServlet {
 		
 		List<Party> pp = OfyService.ofy().load().type(Party.class).list();
 		for (Party p : pp) {
+			if (p.getParticipantsList()==null || p.getParticipantsList().isEmpty())
+				continue;
 			if (p.getParticipantsList().contains(id)) {
 				myEvents.parties.add(p);
 			}
@@ -36,6 +40,8 @@ public class GetParticipantEventsApi extends HttpServlet {
 		
 		List<Sports> sps = OfyService.ofy().load().type(Sports.class).list();
 		for (Sports sp : sps) {
+			if (sp.getParticipants()==null || sp.getParticipants().isEmpty())
+				continue;
 			if (sp.getParticipants().contains(id)) {
 				myEvents.sports.add(sp);
 			}
